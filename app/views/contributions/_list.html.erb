@@ -1,0 +1,32 @@
+<p>
+	<% unless contributions.empty? %>
+		<table class="cntrb">
+		<% contributions.each do |c| %>
+			<tr>
+				<td><%= c.user.name %> donated <%= number_to_currency(c.amount) %></td>
+								
+				<% if anyone_logged_in? %>					
+					<% if user_can_update_contribution?(c) 
+							#Show payment info only if the user owns the contribution or campaign %>
+							<td> 
+								<% if c.is_paid %> (Paid) <% else %> (Unpaid) <% end %>
+							</td>
+							<td>
+								<%= link_to "Delete", campaign_contribution_path(c.campaign, c), 
+										:method => :delete, 
+										:confirm => "Are you sure you want to delete this contribution?" %>
+							</td>
+							<td>
+								<%= render :partial => "contributions/pay", :locals => { :contribution => c } %>
+							</td>
+						<% end %>
+					</td>
+				<% end %>
+				
+			</tr>
+		<% end %>
+		</table>
+	<% else %>
+		<i>(None yet)</i>
+	<% end %>
+</p>

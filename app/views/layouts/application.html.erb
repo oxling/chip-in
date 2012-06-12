@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chip In</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<h1>Chip In</h1>
+<% if anyone_logged_in? %>
+		<%= link_to "All Campaigns", campaigns_path %>
+	| <%= link_to "My Campaigns", user_path(current_user) %> 
+	| <%= link_to "Start Campaign", new_campaign_path %>
+<% end %>
+<hr>
+<%= yield %>
+
+<hr>
+<% if anyone_logged_in? %>
+	<% user = current_user %>
+	Logged in as <%= user.name %> (<%= link_to user.email, user %>) <br/>
+	<%= link_to "Log out", logout_user_path(user), { :method => :post } %>
+<% else %>
+	<%= link_to "Log in", login_users_path %> or <%= link_to "Create account", new_user_path %>
+<% end %>
+
+</body>
+</html>

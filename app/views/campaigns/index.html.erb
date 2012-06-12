@@ -1,0 +1,7 @@
+<h1>All Campaigns</h1>
+<% if current_user %>
+	<p>
+		<%= link_to "Create a new campaign", new_campaign_path %><br/>
+	</p>
+<% end %>
+<%= render :partial => "campaigns/list", :locals => { :campaigns => @campaigns } %>

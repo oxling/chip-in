@@ -1,0 +1,17 @@
+<p>
+	<% unless campaigns.empty? %>
+		<table class="campaigns">
+		<% campaigns.each do |c| %>
+			<tr>
+				<td width="70%">
+					<b><%= link_to c.title, c %></b> - 
+					<%= "%0.0f%% funded" % c.total_contributions.div(c.amount).*(100) %> 
+				</td>
+				<td width="30%"> started by <%= link_to c.user.name, c.user %></td>
+			</tr>
+		<% end %>
+		</table>
+	<% else %>
+		<i>(None)</i>
+	<% end %>
+</p>

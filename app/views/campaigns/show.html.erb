@@ -1,0 +1,41 @@
+<h1><%= @campaign.title %></h1>
+<p>
+		Started by <%= @campaign.user.name %>
+</p>
+<p>
+	Goal: <%= number_to_currency(@campaign.amount) %> <br/>
+	Total contributions: <%= number_to_currency(@campaign.total_contributions) %> <br/>
+</p>
+
+<% if user_owns_campaign?(@campaign) %>
+<h2>Payments</h2>
+<p>
+	Paid contributions: <%= number_to_currency(@campaign.paid_contributions) %> <br/>
+</p>
+<% end %>
+
+<h2>Contributions</h2>
+<%= render :partial => 'contributions/list', :locals => { :contributions => @campaign.contributions } %>
+
+<h2>Contribute</h2>
+<% if notice %>
+		<p>
+			<font color="red">
+				<%= notice %><br/>
+			</font>
+		</p>
+<% end %>
+<%= form_for([@campaign, @campaign.contributions.build]) do |f| %>
+	<div class="field">
+		<%= f.label :amount %><br/>
+		<%= f.text_field :amount %>
+	</div>
+	<div class="actions">
+		<%= f.submit "Contribute" %>
+	</div>
+<% end %>
+
+<p>
+	<%= link_to 'Back', campaigns_path %>
+</p>
+

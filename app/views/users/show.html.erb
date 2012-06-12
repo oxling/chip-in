@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+<h1><%= @user.name %></h1>
+
+<h2>Started Campaigns</h2>
+<%= render :partial => "campaigns/list", :locals => { :campaigns => @own_campaigns } %>
+
+<h2>Contributed Campaigns</h2>
+<%= render :partial => "campaigns/list", :locals => { :campaigns => @contributed_campaigns } %>

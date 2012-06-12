@@ -1,0 +1,9 @@
+<% if user_can_update_contribution?(contribution) %>
+	<% if contribution.is_paid %>
+		<%= link_to "Mark as unpaid", campaign_contribution_path(contribution.campaign, contribution, :is_paid => false), 
+				:method => :put %>
+	<% else %>
+		<%= link_to "Mark as paid", campaign_contribution_path(contribution.campaign, contribution, :is_paid => true),
+				:method => :put %>
+	<% end %>
+<% end %>
