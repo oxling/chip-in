@@ -19,7 +19,7 @@
 <hr>
 <% if anyone_logged_in? %>
 	<% user = current_user %>
-	Logged in as <%= user.name %> (<%= link_to user.email, user %>) <br/>
+	Logged in as <%= user.display_name %> (<%= link_to user.email, user %>) <br/>
 	<%= link_to "Log out", logout_user_path(user), { :method => :post } %>
 <% else %>
 	<%= link_to "Log in", login_users_path %> or <%= link_to "Create account", new_user_path %>

@@ -3,7 +3,7 @@
 		<table class="cntrb">
 		<% contributions.each do |c| %>
 			<tr>
-				<td><%= c.user.name %> donated <%= number_to_currency(c.amount) %></td>
+				<td><%= c.user.display_name %> donated <%= number_to_currency(c.amount) %></td>
 								
 				<% if anyone_logged_in? %>					
 					<% if user_can_update_contribution?(c) 

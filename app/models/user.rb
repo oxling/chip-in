@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   validates :salt, :presence => true
   validates :password, :presence => true, :length => 1..100, :confirmation => true
   validates :password_confirmation, :presence => true, :length => 1..100
+  validates :name, :length => 1..100, :presence => true
   
   def self.generate_salt(len)
   	chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
@@ -35,11 +36,14 @@ class User < ActiveRecord::Base
   	return @password
   end
   
-  def name
-  	return @name unless @name == nil
-  	return "Anonymous" + self.id.to_s
-  end
-    
+  def display_name
+  	if self.name == nil 
+  		return "Anonymous" + id.to_s
+  	else 
+  		return self.name
+  	end
+	end
+        
   def self.authenticate(email, pass)
   	user=User.find(:first, :conditions=>["email = ?", email])
   	

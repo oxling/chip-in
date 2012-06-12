@@ -1,7 +1,7 @@
 
 class UsersController < ApplicationController
 
-	before_filter :login_required, :except => [ :login ]
+	before_filter :login_required, :except => [ :login, :new, :create ]
 	before_filter :only => [ :edit, :destroy, :update, :logout ] do |controller|
 		if User.exists?(params[:id]) and User.find(params[:id]) == current_user
 			return true

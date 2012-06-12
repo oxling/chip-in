@@ -7,7 +7,7 @@
 					<b><%= link_to c.title, c %></b> - 
 					<%= "%0.0f%% funded" % c.total_contributions.div(c.amount).*(100) %> 
 				</td>
-				<td width="30%"> started by <%= link_to c.user.name, c.user %></td>
+				<td width="30%"> started by <%= link_to c.user.display_name, c.user %></td>
 			</tr>
 		<% end %>
 		</table>
